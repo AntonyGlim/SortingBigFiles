@@ -9,7 +9,7 @@ import java.util.SplittableRandom;
 
 public class Generator {
 
-    private static final int ROWS_COUNT = 10;
+    private static final int ROWS_COUNT = 100;
     private static final String FILE_NAME = "QuotesAndAuthors.txt";
     private static final SplittableRandom RANDOM = new SplittableRandom();
 

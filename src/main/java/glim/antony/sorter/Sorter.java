@@ -10,7 +10,7 @@ public class Sorter {
 
     public static void main(String[] args) throws IOException {
 
-        Map<String, List<Long>> authorsAndTextCoordinates = new TreeMap<>();
+        Map<String, List<Long>> authorsAndFirstSymbolsInLine = new TreeMap<>();
 
         try (FileReader fileReader = new FileReader(INPUT_FILE_NAME);
              BufferedReader bufferedReader = new BufferedReader(fileReader)
@@ -22,10 +22,10 @@ public class Sorter {
 
                 String author = line.split("\t")[1];
 
-                if (!authorsAndTextCoordinates.containsKey(author)) {
-                    authorsAndTextCoordinates.put(author, new ArrayList<>());
+                if (!authorsAndFirstSymbolsInLine.containsKey(author)) {
+                    authorsAndFirstSymbolsInLine.put(author, new ArrayList<>());
                 }
-                authorsAndTextCoordinates.get(author).add(index);
+                authorsAndFirstSymbolsInLine.get(author).add(index);
                 index += line.length() + 1;
                 line = bufferedReader.readLine();
             }
@@ -33,7 +33,7 @@ public class Sorter {
             try (RandomAccessFile randomAccessFile = new RandomAccessFile(INPUT_FILE_NAME, "r");
                  FileWriter fileWriter = new FileWriter(OUTPUT_FILE_NAME, true);
             ) {
-                for (Map.Entry<String, List<Long>> entry : authorsAndTextCoordinates.entrySet()) {
+                for (Map.Entry<String, List<Long>> entry : authorsAndFirstSymbolsInLine.entrySet()) {
                     for (Long coordinates : entry.getValue()) {
                         randomAccessFile.seek(coordinates);
                         line = randomAccessFile.readLine();
